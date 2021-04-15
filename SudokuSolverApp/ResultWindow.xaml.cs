@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Sudoku;
 
 namespace SudokuSolverApp
 {
@@ -19,12 +20,11 @@ namespace SudokuSolverApp
     {
         const int ColumnCount = 9;
         const int RowCount = 9;
-
+        SudokuSolver Solver;
 
         public ResultWindow()
         {
             InitializeComponent();
-            InitializeWindow();
         }
 
         public void InitializeWindow()
@@ -68,6 +68,12 @@ namespace SudokuSolverApp
                     Grid.SetRow(textbox, row);
                     resultGrid.Children.Add(textbox);
                 }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitializeWindow();
+
         }
     }
 }

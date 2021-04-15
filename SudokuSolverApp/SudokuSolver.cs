@@ -27,7 +27,7 @@ namespace Sudoku
             if (!currentField.IsSolved())
             {
                 PlayingField.InstanceCount++;
-                if (PlayingField.InstanceCount == 400)
+                if (PlayingField.InstanceCount == 300)
                     PlayingField.GivenUp = true;
 
                 int counter = 0;

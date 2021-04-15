@@ -120,7 +120,10 @@ namespace SudokuSolverApp
                 {
                     ((entry as TextBox).Text) = string.Format($"{fieldArray[i].GetNumber()}");
                     if (fieldArray[i].IsFixNumber())
-                        (entry as TextBox).Foreground = Brushes.OrangeRed;
+                    {
+                        (entry as TextBox).Foreground = Brushes.DarkCyan;
+                        (entry as TextBox).FontWeight = FontWeights.Bold;
+                    }
                 }
                 i++;
             }

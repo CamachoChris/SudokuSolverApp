@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SudokuSolverApp"
         mc:Ignorable="d"
-        Title="ResultWindow" Height="425" Width="400" Background="Black">
+        Title="ResultWindow" Height="425" Width="400" Background="Black" Loaded="Window_Loaded">
     <Grid>
         <TextBlock Text="Trying to solve..." Foreground="White"/>
         <Grid x:Name="resultGrid"/>
