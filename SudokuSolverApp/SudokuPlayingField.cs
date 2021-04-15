@@ -44,7 +44,7 @@ namespace Sudoku
         public void SetFixNumber(int column, int row, int number)
         {
             playingField[column, row].SetFixNumber(number);
-            SynchronizePotentials(column, row);
+            SyncPotentials(column, row);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Sudoku
         public void SetNumber(int column, int row, int number)
         {
             playingField[column, row].SetNumber(number);
-            SynchronizePotentials(column, row);
+            SyncPotentials(column, row);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Sudoku
         /// </summary>
         /// <param name="column"></param>
         /// <param name="row"></param>        
-        private void SynchronizePotentials(int entryColumn, int entryRow)
+        private void SyncPotentials(int entryColumn, int entryRow)
         {
             //Only synchronize Cells with numbers, otherwise exception.
             if (playingField[entryColumn, entryRow].GetNumber() == 0)

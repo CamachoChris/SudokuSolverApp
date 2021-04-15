@@ -20,7 +20,6 @@ namespace SudokuSolverApp
     {
         const int ColumnCount = 9;
         const int RowCount = 9;
-        SudokuSolver Solver;
 
         public ResultWindow()
         {
