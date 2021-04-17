@@ -10,10 +10,14 @@ namespace Sudoku
     public class SudokuSolver
     {
         readonly SudokuPlayingField PlayingField;
+        public bool GivenUp;
+        public int InstanceCount;
 
         public SudokuSolver(SudokuPlayingField playingField)
         {
             PlayingField = playingField;
+            GivenUp = false;
+            InstanceCount = 0;
         }
 
         /// <summary>
@@ -22,13 +26,13 @@ namespace Sudoku
         /// <param name="currentField"></param>
         public void BruteForce(SudokuPlayingField currentField)
         {
-            if (PlayingField.IsSolved() || PlayingField.GivenUp) return;
+            if (PlayingField.IsSolved() || GivenUp) return;
 
             if (!currentField.IsSolved())
             {
-                PlayingField.InstanceCount++;
-                if (PlayingField.InstanceCount == 300)
-                    PlayingField.GivenUp = true;
+                InstanceCount++;
+                if (InstanceCount == 300)
+                    GivenUp = true;
 
                 int counter = 0;
                 do
@@ -58,8 +62,8 @@ namespace Sudoku
             {
                 BruteForce(PlayingField);
                 isFieldSolved = PlayingField.IsSolved();
-                PlayingField.GivenUp = false;
-                PlayingField.InstanceCount = 0;
+                GivenUp = false;
+                InstanceCount = 0;
                 counter++;
             }
             while (counter < 10 && !isFieldSolved);

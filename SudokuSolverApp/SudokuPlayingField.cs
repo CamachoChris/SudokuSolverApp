@@ -20,14 +20,8 @@ namespace Sudoku
         public SudokuCell[,] playingField;
         private readonly Random _random;
 
-        public bool GivenUp;
-        public int InstanceCount;
-
         public SudokuPlayingField()
         {
-            GivenUp = false;
-            InstanceCount = 0;
-
             _random = new Random();
             playingField = new SudokuCell[9,9];
             for (int row = 0; row < 9; row++)
