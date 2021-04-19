@@ -20,6 +20,11 @@ namespace SudokuSolverApp
 
     public partial class MainWindow : Window
     {
+        const string appName = "SudokuSolver";
+        const string version = "0.1.0";
+        const string developer = "Grimakar";
+        const string timeOfDevelopment = "April 2021";
+
         const int ColumnCount = 9;
         const int RowCount = 9;
 
@@ -137,5 +142,16 @@ namespace SudokuSolverApp
             }
 
         }
+
+        private void menuQuit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void menuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(this, $"{appName}\n{version}\n{timeOfDevelopment} {developer}.\nNo rights reserved...", $"About {appName}");
+        }
+
     }
 }
