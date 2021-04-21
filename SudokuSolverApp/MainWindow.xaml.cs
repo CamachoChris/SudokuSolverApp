@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using Sudoku;
-using SudokuStandardPattern;
 
 namespace SudokuSolverApp
 {
@@ -26,6 +25,7 @@ namespace SudokuSolverApp
         const string developer = "Grimakar";
         const string timeOfDevelopment = "April 2021";
 
+        SudokuGrid sudokuGrid = new SudokuGrid();
         SudokuPlayingField unsolvedSudoku = new SudokuPlayingField();
 
         public MainWindow()
@@ -38,7 +38,7 @@ namespace SudokuSolverApp
             ResultWindow resultWindow = new ResultWindow();
             resultWindow.Owner = this;
 
-            SudokuPattern.LoadToSudokuField(PlayingFieldGrid, unsolvedSudoku);
+            sudokuGrid.GetSudokuField(out unsolvedSudoku);
 
             //Solving the Sudoku
             SudokuSolver solver = new SudokuSolver(unsolvedSudoku);
@@ -50,7 +50,7 @@ namespace SudokuSolverApp
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            SudokuPattern.ClearPattern(PlayingFieldGrid);
+            sudokuGrid.Clear();
         }
 
 
@@ -66,7 +66,8 @@ namespace SudokuSolverApp
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SudokuPattern.Init(PlayingFieldGrid);
+            Grid.SetRow(sudokuGrid, 1);
+            MainGrid.Children.Add(sudokuGrid);
         }
     }
 }

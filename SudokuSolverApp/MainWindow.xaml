@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SudokuSolverApp"
         mc:Ignorable="d"
         Title="SudokuSolver" Height="470" Width="400" WindowStartupLocation="CenterScreen" Background="Black" Loaded="Window_Loaded">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
@@ -20,7 +20,6 @@
             </MenuItem>
         </Menu>
 
-        <Grid Grid.Row="1" x:Name="PlayingFieldGrid"/>
         <DockPanel Grid.Row="2">
             <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Click="ClearButton_Click"/>
             <Button x:Name="SolveButton" Content="Solve" DockPanel.Dock="Left"  Click="SolveButton_Click"/>
