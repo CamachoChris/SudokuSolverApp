@@ -21,7 +21,7 @@ namespace Sudoku
         }
 
         /// <summary>
-        /// By using recursion, this method produces several instances of the Field and tries solving.
+        /// By using recursion, this method produces instances of the Field and tries solving.
         /// </summary>
         /// <param name="currentField"></param>
         public void BruteForce(SudokuPlayingField currentField)

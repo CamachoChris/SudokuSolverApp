@@ -54,7 +54,7 @@ namespace Sudoku
         }
 
         /// <summary>
-        /// Searches the Field for unsolved Cells and influences the IsSolved value of the Field.
+        /// Searches the Field for unsolved Cells.
         /// </summary>
         /// <returns>Returns true, if no unsolved fields are left.</returns>
         public bool IsSolved()
@@ -129,7 +129,7 @@ namespace Sudoku
         }
 
         /// <summary>
-        /// Finds the last Potential (Mandatory) and makes it the official Number of the Cell.
+        /// Finds the last remaining Potential (Mandatory) and makes it the official Number of the Cell.
         /// </summary>
         public void SetMandatoryAsNumber(int column, int row)
         {
@@ -236,8 +236,6 @@ namespace Sudoku
         /// <param name="copyToThisField"></param>
         public void CopyPlayingFieldTo(SudokuPlayingField copyToThisField)
         {
-            
-
             for (int column = 0; column < 9; column++)
                 for (int row = 0; row < 9; row++)
                 {

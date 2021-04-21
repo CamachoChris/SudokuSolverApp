@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SudokuSolverApp"
         mc:Ignorable="d"
-        Title="SudokuSolver" Height="470" Width="400" WindowStartupLocation="CenterScreen" Background="Black">
+        Title="SudokuSolver" Height="470" Width="400" WindowStartupLocation="CenterScreen" Background="Black" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -14,13 +14,13 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="_Menu">
-                <MenuItem Header="_About" x:Name="menuAbout" Click="menuAbout_Click"/>
+                <MenuItem Header="_About" x:Name="MenuAbout" Click="MenuAbout_Click"/>
                 <Separator/>
-                <MenuItem Header="_Quit" x:Name="menuQuit" Click="menuQuit_Click"/>
+                <MenuItem Header="_Quit" x:Name="MenuQuit" Click="MenuQuit_Click"/>
             </MenuItem>
         </Menu>
 
-        <Grid Grid.Row="1" x:Name="playingFieldGrid"/>
+        <Grid Grid.Row="1" x:Name="PlayingFieldGrid"/>
         <DockPanel Grid.Row="2">
             <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Click="ClearButton_Click"/>
             <Button x:Name="SolveButton" Content="Solve" DockPanel.Dock="Left"  Click="SolveButton_Click"/>
