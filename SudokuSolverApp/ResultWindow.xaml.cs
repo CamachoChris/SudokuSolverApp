@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
 using Sudoku;
 
 namespace SudokuSolverApp
@@ -16,7 +17,7 @@ namespace SudokuSolverApp
     public partial class ResultWindow : Window
     {
         SudokuGrid sudokuGrid = new SudokuGrid();
-        public SudokuPlayingField SolvedSudoku;
+        public SudokuSolverVM SolverVM = new SudokuSolverVM();
 
         public ResultWindow()
         {
@@ -25,8 +26,14 @@ namespace SudokuSolverApp
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            SolverVM.SudokuSolved += SolverVM_SudokuSolved;
+            SolverVM.Solve();
+        }
+
+        private void SolverVM_SudokuSolved(object sender, EventArgs e)
+        {
             MainGrid.Children.Add(sudokuGrid);
-            sudokuGrid.SetSudokuField(SolvedSudoku);
+            sudokuGrid.SetSudokuField(SolverVM.PlayingField);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +18,6 @@ using Sudoku;
 
 namespace SudokuSolverApp
 {
-
     public partial class MainWindow : Window
     {
         const string appName = "SudokuSolver";
@@ -26,7 +26,6 @@ namespace SudokuSolverApp
         const string timeOfDevelopment = "April 2021";
 
         SudokuGrid sudokuGrid = new SudokuGrid();
-        SudokuPlayingField unsolvedSudoku = new SudokuPlayingField();
 
         public MainWindow()
         {
@@ -35,17 +34,17 @@ namespace SudokuSolverApp
 
         private void SolveButton_Click(object sender, RoutedEventArgs e)
         {
+            bool valid = sudokuGrid.GetSudokuField(out SudokuPlayingField unsolvedSudoku);
+            if (!valid)
+            {
+                MessageBox.Show("Only numbers from 1 to 9");
+                return;
+            }
+
             ResultWindow resultWindow = new ResultWindow();
             resultWindow.Owner = this;
-
-            sudokuGrid.GetSudokuField(out unsolvedSudoku);
-
-            //Solving the Sudoku
-            SudokuSolver solver = new SudokuSolver(unsolvedSudoku);
-            solver.Solve();
-
-            resultWindow.SolvedSudoku = unsolvedSudoku;
-            resultWindow.Show();
+            resultWindow.SolverVM.PlayingField = unsolvedSudoku;
+            resultWindow.Show(); //going to Window_Loaded from ResultWindow
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
