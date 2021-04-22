@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="ResultWindow" Height="425" Width="400" Background="Black" Loaded="Window_Loaded">
     <Grid x:Name="MainGrid">
-        <TextBlock Text="Trying to solve..." Foreground="White"/>
+        <TextBlock Text="Trying to solve..." Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>
