@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -27,13 +28,15 @@ namespace SudokuSolverApp
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SolverVM.SudokuSolved += SolverVM_SudokuSolved;
-            SolverVM.Solve();
+            Task.Run(() => { SolverVM.Solve(); });
         }
 
         private void SolverVM_SudokuSolved(object sender, EventArgs e)
         {
-            MainGrid.Children.Add(sudokuGrid);
-            sudokuGrid.SetSudokuField(SolverVM.PlayingField);
+            Dispatcher.BeginInvoke((Action)(() => {
+                MainGrid.Children.Add(sudokuGrid);
+                sudokuGrid.SetSudokuField(SolverVM.PlayingField);
+            }));
         }
     }
 }

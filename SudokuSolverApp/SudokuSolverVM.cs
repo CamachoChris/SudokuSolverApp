@@ -31,7 +31,6 @@ namespace SudokuSolverApp
 
         public void Solve()
         {
-            //Thread.Sleep(5000); //for later testing async
             SudokuSolver solver = new SudokuSolver(playingField);
             solver.Solve();
             if (SudokuSolved != null)
