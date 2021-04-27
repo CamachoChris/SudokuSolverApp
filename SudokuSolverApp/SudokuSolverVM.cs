@@ -20,8 +20,6 @@ namespace SudokuSolverApp
 {    
     public class SudokuSolverVM
     {
-        public event EventHandler SudokuSolved;
-
         private SudokuPlayingField playingField;
         public SudokuPlayingField PlayingField
         {
@@ -33,8 +31,6 @@ namespace SudokuSolverApp
         {
             SudokuSolver solver = new SudokuSolver(playingField);
             solver.Solve();
-            if (SudokuSolved != null)
-                SudokuSolved(this, EventArgs.Empty);
         }
     }
 }

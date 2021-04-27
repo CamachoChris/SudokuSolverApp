@@ -25,18 +25,11 @@ namespace SudokuSolverApp
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SolverVM.SudokuSolved += SolverVM_SudokuSolved;
-            Task.Run(() => { SolverVM.Solve(); });
-        }
-
-        private void SolverVM_SudokuSolved(object sender, EventArgs e)
-        {
-            Dispatcher.BeginInvoke((Action)(() => {
-                MainGrid.Children.Add(sudokuGrid);
-                sudokuGrid.SetSudokuField(SolverVM.PlayingField);
-            }));
+            await Task.Run(() => { SolverVM.Solve(); });
+            MainGrid.Children.Add(sudokuGrid);
+            sudokuGrid.SetSudokuField(SolverVM.PlayingField);
         }
     }
 }
