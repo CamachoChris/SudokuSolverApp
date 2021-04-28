@@ -20,16 +20,16 @@ namespace SudokuSolverApp
 {    
     public class SudokuSolverVM
     {
-        private SudokuPlayingField playingField;
+        private SudokuPlayingField _playingField;
         public SudokuPlayingField PlayingField
         {
-            get { return playingField; }
-            set { playingField = value; }
+            get => _playingField;
+            set => _playingField = value;
         }
 
         public void Solve()
         {
-            SudokuSolver solver = new SudokuSolver(playingField);
+            SudokuSolver solver = new SudokuSolver(_playingField);
             solver.Solve();
         }
     }

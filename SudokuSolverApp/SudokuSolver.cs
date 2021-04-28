@@ -9,15 +9,15 @@ namespace Sudoku
 {
     public class SudokuSolver
     {
-        readonly SudokuPlayingField PlayingField;
-        public bool GivenUp;
-        public int InstanceCount;
+        private readonly SudokuPlayingField _playingField;
+        private bool _givenUp;
+        private int _instanceCount;
 
         public SudokuSolver(SudokuPlayingField playingField)
         {
-            PlayingField = playingField;
-            GivenUp = false;
-            InstanceCount = 0;
+            _playingField = playingField;
+            _givenUp = false;
+            _instanceCount = 0;
         }
 
         /// <summary>
@@ -26,13 +26,13 @@ namespace Sudoku
         /// <param name="currentField"></param>
         private void BruteForce(SudokuPlayingField currentField)
         {
-            if (PlayingField.IsSolved() || GivenUp) return;
+            if (_playingField.IsSolved() || _givenUp) return;
 
             if (!currentField.IsSolved())
             {
-                InstanceCount++;
-                if (InstanceCount == 300)
-                    GivenUp = true;
+                _instanceCount++;
+                if (_instanceCount == 300)
+                    _givenUp = true;
 
                 int counter = 0;
                 do
@@ -40,7 +40,7 @@ namespace Sudoku
                     currentField.TryPotential(counter);
                     if (currentField.IsSolved())
                     {
-                        currentField.CopyPlayingFieldTo(PlayingField);
+                        currentField.CopyPlayingFieldTo(_playingField);
                         return;
                     }
                     else
@@ -60,14 +60,14 @@ namespace Sudoku
             bool isFieldSolved;
             do
             {
-                BruteForce(PlayingField);
-                isFieldSolved = PlayingField.IsSolved();
-                GivenUp = false;
-                InstanceCount = 0;
+                BruteForce(_playingField);
+                isFieldSolved = _playingField.IsSolved();
+                _givenUp = false;
+                _instanceCount = 0;
                 counter++;
             }
             while (counter < 10 && !isFieldSolved);
-            return PlayingField.IsSolved();
+            return _playingField.IsSolved();
         }
     }
 }

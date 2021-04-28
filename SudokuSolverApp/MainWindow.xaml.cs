@@ -25,7 +25,7 @@ namespace SudokuSolverApp
         const string developer = "Grimakar";
         const string timeOfDevelopment = "April 2021";
 
-        SudokuGrid sudokuGrid = new SudokuGrid();
+        private SudokuGrid _sudokuGrid = new SudokuGrid();
 
         public MainWindow()
         {
@@ -34,7 +34,7 @@ namespace SudokuSolverApp
 
         private void SolveButton_Click(object sender, RoutedEventArgs e)
         {
-            bool valid = sudokuGrid.GetSudokuField(out SudokuPlayingField unsolvedSudoku);
+            bool valid = _sudokuGrid.GetSudokuField(out SudokuPlayingField unsolvedSudoku);
             if (!valid)
             {
                 MessageBox.Show("Only numbers from 1 to 9");
@@ -49,7 +49,7 @@ namespace SudokuSolverApp
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            sudokuGrid.Clear();
+            _sudokuGrid.Clear();
         }
 
 
@@ -65,8 +65,8 @@ namespace SudokuSolverApp
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Grid.SetRow(sudokuGrid, 1);
-            MainGrid.Children.Add(sudokuGrid);
+            Grid.SetRow(_sudokuGrid, 1);
+            MainGrid.Children.Add(_sudokuGrid);
         }
     }
 }

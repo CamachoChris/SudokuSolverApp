@@ -17,7 +17,7 @@ namespace SudokuSolverApp
 {
     public partial class ResultWindow : Window
     {
-        SudokuGrid sudokuGrid = new SudokuGrid();
+        private SudokuGrid _sudokuGrid = new SudokuGrid();
         public SudokuSolverVM SolverVM = new SudokuSolverVM();
 
         public ResultWindow()
@@ -28,8 +28,8 @@ namespace SudokuSolverApp
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await Task.Run(() => { SolverVM.Solve(); });
-            MainGrid.Children.Add(sudokuGrid);
-            sudokuGrid.SetSudokuField(SolverVM.PlayingField);
+            MainGrid.Children.Add(_sudokuGrid);
+            _sudokuGrid.SetSudokuField(SolverVM.PlayingField);
         }
     }
 }

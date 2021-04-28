@@ -119,7 +119,7 @@ namespace SudokuSolverApp
             for (int row = 0; row < RowCount; row++)
                 for (int column = 0; column < ColumnCount; column++)
                 {
-                    fieldArray[i] = playingField.playingField[column, row];
+                    fieldArray[i] = playingField.PlayingField[column, row];
                     i++;
                 }
 
@@ -127,10 +127,10 @@ namespace SudokuSolverApp
             i = 0;
             foreach (var entry in this.Children)
             {
-                if (fieldArray[i].GetNumber() != 0)
+                if (fieldArray[i].Number != 0)
                 {
-                    ((entry as TextBox).Text) = string.Format($"{fieldArray[i].GetNumber()}");
-                    if (fieldArray[i].IsFixNumber())
+                    ((entry as TextBox).Text) = string.Format($"{fieldArray[i].Number}");
+                    if (fieldArray[i].IsFixNumber)
                     {
                         (entry as TextBox).Foreground = Brushes.DarkCyan;
                         (entry as TextBox).FontWeight = FontWeights.Bold;

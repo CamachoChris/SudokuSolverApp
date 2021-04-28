@@ -17,16 +17,15 @@ namespace Sudoku
      */
     public class SudokuPlayingField
     {
-        public SudokuCell[,] playingField;
-        private readonly Random _random;
+        public SudokuCell[,] PlayingField { get; private set; }
+        private readonly Random _random = new Random();
 
         public SudokuPlayingField()
         {
-            _random = new Random();
-            playingField = new SudokuCell[9,9];
+            PlayingField = new SudokuCell[9,9];
             for (int row = 0; row < 9; row++)
                 for (int column = 0; column < 9; column++)
-                    playingField[column, row] = new SudokuCell();
+                    PlayingField[column, row] = new SudokuCell();
         }
 
         /// <summary>
@@ -37,7 +36,7 @@ namespace Sudoku
         /// <param name="number"></param>
         public void SetFixNumber(int column, int row, int number)
         {
-            playingField[column, row].SetFixNumber(number);
+            PlayingField[column, row].SetFixNumber(number);
             SyncPotentials(column, row);
         }
 
@@ -49,7 +48,7 @@ namespace Sudoku
         /// <param name="number"></param>
         public void SetNumber(int column, int row, int number)
         {
-            playingField[column, row].SetNumber(number);
+            PlayingField[column, row].Number = number;
             SyncPotentials(column, row);
         }
 
@@ -62,7 +61,7 @@ namespace Sudoku
             for (int column = 0; column < 9; column++)
                 for (int row = 0; row < 9; row++)
                 {
-                    if (playingField[column, row].GetNumber() == 0)
+                    if (PlayingField[column, row].Number == 0)
                         return false;
                 }
             return true;
@@ -75,8 +74,8 @@ namespace Sudoku
         /// <param name="row"></param>        
         private void SyncPotentials(int entryColumn, int entryRow)
         {
-            //Only synchronize Cells with numbers, otherwise exception.
-            if (playingField[entryColumn, entryRow].GetNumber() == 0)
+            //Only synchronize Cells with Numbers, otherwise exception.
+            if (PlayingField[entryColumn, entryRow].Number == 0)
                 return;
 
             int startColumnForSquare = StartColumnForSquare(entryColumn);
@@ -86,17 +85,17 @@ namespace Sudoku
             {
                 //Synchronize column
                 if (i != entryRow)
-                    playingField[entryColumn, i].RemovePotential(playingField[entryColumn, entryRow].GetNumber());
+                    PlayingField[entryColumn, i].RemovePotential(PlayingField[entryColumn, entryRow].Number);
 
                 //Synchronize row
                 if (i != entryColumn)
-                    playingField[i, entryRow].RemovePotential(playingField[entryColumn, entryRow].GetNumber());
+                    PlayingField[i, entryRow].RemovePotential(PlayingField[entryColumn, entryRow].Number);
 
                 //Synchronize square
                 int parseColumn = LineToSquareColumn(i, 3) + startColumnForSquare;
                 int parseRow = LineToSquareRow(i, 3) + startRowForSquare;
                 if (!(parseColumn == entryColumn && parseRow == entryRow))
-                    playingField[parseColumn, parseRow].RemovePotential(playingField[entryColumn, entryRow].GetNumber());
+                    PlayingField[parseColumn, parseRow].RemovePotential(PlayingField[entryColumn, entryRow].Number);
             }
         }
 
@@ -106,7 +105,7 @@ namespace Sudoku
         /// <param name="value">Value has to be from 1 to 9.</param>
         public void SetPotentialAsNumber(int column, int row, int value)
         {
-            if (playingField[column, row].IsPotential(value))
+            if (PlayingField[column, row].IsPotential(value))
                 SetNumber(column, row, value);
         }
 
@@ -120,7 +119,7 @@ namespace Sudoku
             int rndPosition = _random.Next(10);
             for (int i = 1; i <= 9; i++)
             {
-                if (playingField[column, row].IsPotential(i) && rndPosition == i)
+                if (PlayingField[column, row].IsPotential(i) && rndPosition == i)
                 {
                     SetPotentialAsNumber(column, row, i);
                     return;
@@ -133,9 +132,9 @@ namespace Sudoku
         /// </summary>
         public void SetMandatoryAsNumber(int column, int row)
         {
-            if (playingField[column, row].PotentialsCounter() == 1)
+            if (PlayingField[column, row].PotentialsCounter() == 1)
                 for (int i = 1; i <= 9; i++)
-                    if (playingField[column, row].IsPotential(i))
+                    if (PlayingField[column, row].IsPotential(i))
                     {
                         SetPotentialAsNumber(column, row, i);
                         return;
@@ -151,7 +150,7 @@ namespace Sudoku
             int counter = 0;
             for (int row = 0; row < 9; row++)
                 for (int column = 0; column < 9; column++)
-                    if (playingField[column, row].PotentialsCounter() == 1)
+                    if (PlayingField[column, row].PotentialsCounter() == 1)
                         counter++;
             return counter;
         }
@@ -163,7 +162,7 @@ namespace Sudoku
         {
             for (int row = 0; row < 9; row++)
                 for (int column = 0; column < 9; column++)
-                    if (playingField[column, row].PotentialsCounter() == 1)
+                    if (PlayingField[column, row].PotentialsCounter() == 1)
                     {
                         SetMandatoryAsNumber(column, row);
                     }
@@ -191,7 +190,7 @@ namespace Sudoku
                 for (int row = 0; row < 9; row++)
                     for (int column = 0; column < 9; column++)
                     {
-                        int potentialCount = playingField[column, row].PotentialsCounter();
+                        int potentialCount = PlayingField[column, row].PotentialsCounter();
                         if (potentialCount == i)
                         {
                             if (position == counter)
@@ -227,7 +226,7 @@ namespace Sudoku
 
         private SudokuCell GetCell(int column, int row)
         {
-            return playingField[column, row];
+            return PlayingField[column, row];
         }
 
         /// <summary>
@@ -239,7 +238,7 @@ namespace Sudoku
             for (int column = 0; column < 9; column++)
                 for (int row = 0; row < 9; row++)
                 {
-                     this.GetCell(column, row).CopyCellTo(copyToThisField.playingField[column, row]);
+                     this.GetCell(column, row).CopyCellTo(copyToThisField.PlayingField[column, row]);
                 }            
         }
 
@@ -250,7 +249,7 @@ namespace Sudoku
             {
                 for (int entry = 0; entry < 9; entry++)
                 {
-                    Debug.Write($"{playingField[entry, row].GetNumber()} ");
+                    Debug.Write($"{PlayingField[entry, row].Number} ");
                     if (entry % 3 == 2)
                         Debug.Write("| ");
                 }
@@ -267,7 +266,7 @@ namespace Sudoku
             {
                 for (int entry = 0; entry < 9; entry++)
                 {
-                    Debug.Write($"{playingField[entry, row].PotentialsCounter()} ");
+                    Debug.Write($"{PlayingField[entry, row].PotentialsCounter()} ");
                     if (entry % 3 == 2)
                         Debug.Write("| ");
                 }

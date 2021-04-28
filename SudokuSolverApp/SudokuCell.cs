@@ -18,10 +18,27 @@ namespace Sudoku
     public class SudokuCell
     {
         private int _number;
+        public int Number
+        {
+            get => _number;
+            set
+            {
+                if (value > 0 && value <= 9)
+                {
+                    _number = value;
+                    RemoveAllPotentials();
+                }
+                else
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private bool _isFixNumber;
+        public bool IsFixNumber { get => _isFixNumber; }
 
         private readonly bool[] _potentialNumbers;
         private int _potentialsCount;
+        public int PotentialsCount { get => _potentialsCount; }
 
         public SudokuCell()
         {
@@ -34,31 +51,10 @@ namespace Sudoku
             _isFixNumber = false;            
         }
 
-        public void SetNumber(int value)
-        {
-            _number = value;
-            RemoveAllPotentials();            
-        }
-
-        public int GetNumber()
-        {
-            return _number;
-        }
-
         public void SetFixNumber(int value)
         {
-            SetNumber(value);
+            Number = value;
             _isFixNumber = true;
-        }
-
-        public bool IsFixNumber()
-        {
-            return _isFixNumber;
-        }
-
-        public int GetPotentialsCount()
-        {
-            return _potentialsCount;
         }
 
         /// <summary>
